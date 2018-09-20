@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/adrianeguez/man-lab-yo-nest/issues"
   },
-  "homepage": "https://github.com/adrianeguez/man-lab-yo-nest#readme"
+  "homepage": "https://github.com/adrianeguez/man-lab-yo-nest#readme",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^1.0.0"
+  }
 }
