@@ -22,9 +22,15 @@ module.exports = class extends Generator {
             arguments: [nombreApi]
         }
 
-        const directorioDelGenerador = require.resolve('../service');
+        const directorioDelGeneradorServicio = require.resolve('../service');
+        const directorioDelGeneradorController = require.resolve('../controller');
+        const directorioDelGeneradorResolver = require.resolve('../resolver');
+        const directorioDelGeneradorGateway = require.resolve('../gateway');
 
-        this.composeWith(directorioDelGenerador, opciones);
+        this.composeWith(directorioDelGeneradorServicio, opciones);
+        this.composeWith(directorioDelGeneradorController, opciones);
+        this.composeWith(directorioDelGeneradorResolver, opciones);
+        this.composeWith(directorioDelGeneradorGateway, opciones);
     }
 
     initializing() {
@@ -77,4 +83,5 @@ module.exports = class extends Generator {
     }
 
 };
+
 
