@@ -6,25 +6,23 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: true,
-            desc: 'Nombre del api EJ: EmpresaYEcuatoriana'
+            desc: 'Nombre del controlador EJ: EmpresaYEcuatoriana'
         }
     }
 }
+const TEMPLATES = {
+    CONTROLLER: 'controller.ts'
+}
+
+const camelToDash = str => str
+    .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
+    .replace(/([A-Z])/g, ([letter]) => `-${letter.toLowerCase()}`);
+
 
 module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
-
-        const nombreApi = [this.options[ARGUMENTOS.NOMBRE.nombre]];
-
-        const opciones = {
-            arguments: [nombreApi]
-        }
-
-        const directorioDelGenerador = require.resolve('../service');
-
-        this.composeWith(directorioDelGenerador, opciones);
     }
 
     initializing() {
@@ -61,6 +59,22 @@ module.exports = class extends Generator {
 
 
     writing() {
+        const nombreController = this.options[ARGUMENTOS.NOMBRE.nombre];
+        const nombreControllerMinuscula = camelToDash(nombreController);
+        const nombreControllerPrivado = capitalizeFirstLetter(nombreController);
+        const template = this.templatePath(TEMPLATES.CONTROLLER);
+        const destino = this.destinationPath(`${nombreControllerMinuscula}.controller.ts`);
+        const variables = {
+            nombreController,
+            nombreControllerMinuscula,
+            nombreControllerPrivado
+        };
+
+        this.fs.copyTpl(
+            template,
+            destino,
+            variables
+        );
     }
 
     conflicts() {
@@ -73,8 +87,12 @@ module.exports = class extends Generator {
 
     end() {
         const nombreServicio = this.options[ARGUMENTOS.NOMBRE.nombre];
-        this.log(`Api ${nombreServicio} creado :)`)
+        this.log(`Controlador ${nombreServicio} creado :)`)
     }
 
 };
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+}
 
