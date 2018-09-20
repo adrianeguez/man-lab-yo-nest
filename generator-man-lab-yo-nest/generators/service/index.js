@@ -42,7 +42,7 @@ module.exports = class extends Generator {
 
     }
     configuring() {
-        this.log('configuring ')
+        // this.log('configuring ')
     }
 
     default() {
@@ -59,12 +59,11 @@ module.exports = class extends Generator {
 
 
     writing() {
-        this.log('writing ')
         const nombreServicio = this.options[ARGUMENTOS.NOMBRE.nombre];
         const nombreServicioMinuscula = camelToDash(nombreServicio);
         const nombreServicioPrivado = capitalizeFirstLetter(nombreServicio);
         const template = this.templatePath(TEMPLATES.SERVICIO);
-        const destino = this.destinationPath(`${nombreServicioMinuscula}-service.ts`);
+        const destino = this.destinationPath(`${nombreServicioMinuscula}.service.ts`);
         const variables = {
             nombreServicio,
             nombreServicioMinuscula,
@@ -87,7 +86,8 @@ module.exports = class extends Generator {
     }
 
     end() {
-        // this.log('end ')
+        const nombreServicio = this.options[ARGUMENTOS.NOMBRE.nombre];
+        this.log(`Servicio ${nombreServicio} creado :)`)
     }
 
 };
