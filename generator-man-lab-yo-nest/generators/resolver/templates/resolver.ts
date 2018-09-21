@@ -1,4 +1,4 @@
-import { Resolver } from "@nestjs/graphql";
+import { Resolver, Query, Args, Context, Info, Parent, Root, Mutation } from "@nestjs/graphql";
 import { PrincipalResolver } from 'man-lab-nest';
 import { <%= nombreResolver %>Service } from "./<%= nombreResolverMinuscula %>.service";
 import { <%= nombreResolver %>CreateDto } from "./<%= nombreResolverMinuscula %>-create-dto/<%= nombreResolverMinuscula %>-create-dto";
@@ -32,6 +32,68 @@ export class <%= nombreResolver %>Resolver extends PrincipalResolver {
             undefined // contexto
         );
         this.contexto = this;
+    }
+
+
+    @Query('findAll<%= nombreResolver %>')
+    findAll<%= nombreResolver %>(
+        @Args('criterioBusqueda') criterioBusqueda: string,
+        @Args() args,
+        @Context() context,
+        @Info() info,
+        @Parent() parent,
+        @Root() root,
+    ) {
+        return this.findAll(criterioBusqueda, args, context, info, parent, root);
+    }
+
+    @Query('findOne<%= nombreResolver %>ById')
+    findOne<%= nombreResolver %>ById(
+        @Args('id') id,
+        @Args() args,
+        @Context() context,
+        @Info() info,
+        @Parent() parent,
+        @Root() root,
+    ) {
+        return this.findOneById(id, args, context, info, parent, root);
+    }
+
+    @Mutation('createOne<%= nombreResolver %>')
+    createOne<%= nombreResolver %>(
+        @Args('nuevoRegistro') nuevoRegistro,
+        @Args() args,
+        @Context() context,
+        @Info() info,
+        @Parent() parent,
+        @Root() root,
+    ) {
+        return this.createOne(nuevoRegistro, args, context, info, parent, root);
+    }
+
+    @Mutation('deleteOne<%= nombreResolver %>')
+    deleteOne<%= nombreResolver %>(
+        @Args('id') id,
+        @Args() args,
+        @Context() context,
+        @Info() info,
+        @Parent() parent,
+        @Root() root,
+    ) {
+        return this.deleteOne(id, args, context, info, parent, root);
+    }
+
+    @Mutation('updateOne<%= nombreResolver %>')
+    updateOne<%= nombreResolver %>(
+        @Args('id') id,
+        @Args('registroAActualizar') registroAActualizar,
+        @Args() args,
+        @Context() context,
+        @Info() info,
+        @Parent() parent,
+        @Root() root,
+    ) {
+        return this.updateOne(id, registroAActualizar, args, context, info, parent, root);
     }
 
 }
