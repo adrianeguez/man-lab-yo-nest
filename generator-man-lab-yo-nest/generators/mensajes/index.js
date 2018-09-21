@@ -6,12 +6,12 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: true,
-            desc: 'Nombre del resolver EJ: EmpresaYEcuatoriana'
+            desc: 'Nombre del archivo de mensajes EJ: EmpresaYEcuatoriana'
         }
     }
 }
 const TEMPLATES = {
-    RESOLVER: 'resolver.ts'
+    MENSAJES: 'mensajes.ts'
 }
 
 const camelToDash = str => str
@@ -23,18 +23,6 @@ module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
-
-        this.option('types');
-        const types = this.options.types
-        if (types) {
-            const nombreApi = [this.options[ARGUMENTOS.NOMBRE.nombre]];
-            const opciones = {
-                arguments: [nombreApi],
-                version2: true,
-            }
-            const directorioDelGeneradorGraphql = require.resolve('../graphql');
-            this.composeWith(directorioDelGeneradorGraphql, opciones);
-        }
     }
 
     initializing() {
@@ -71,15 +59,12 @@ module.exports = class extends Generator {
 
 
     writing() {
-        const nombreResolver = this.options[ARGUMENTOS.NOMBRE.nombre];
-        const nombreResolverMinuscula = camelToDash(nombreResolver);
-        const nombreResolverPrivado = capitalizeFirstLetter(nombreResolver);
-        const template = this.templatePath(TEMPLATES.RESOLVER);
-        const destino = this.destinationPath(`${nombreResolverMinuscula}.resolver.ts`);
+        const nombreMensajes = this.options[ARGUMENTOS.NOMBRE.nombre];
+        const nombreMensajesMinuscula = camelToDash(nombreMensajes);
+        const template = this.templatePath(TEMPLATES.MENSAJES);
+        const destino = this.destinationPath(`${nombreMensajesMinuscula}-mensajes/${nombreMensajesMinuscula}.mensajes.ts`);
         const variables = {
-            nombreResolver,
-            nombreResolverMinuscula,
-            nombreResolverPrivado
+            nombreMensajes
         };
 
         this.fs.copyTpl(
@@ -99,7 +84,7 @@ module.exports = class extends Generator {
 
     end() {
         const nombreServicio = this.options[ARGUMENTOS.NOMBRE.nombre];
-        this.log(`Resolver ${nombreServicio} creado :)`)
+        this.log(`Mensajes ${nombreServicio} creado :)`)
     }
 
 };

@@ -4,17 +4,13 @@ import { <%= nombreController %>UpdateDto } from './<%= nombreControllerMinuscul
 import { <%= nombreController %>CreateDto } from './<%= nombreControllerMinuscula %>-create-dto/<%= nombreControllerMinuscula %>-create-dto';
 import { <%= nombreController %>Entity } from './<%= nombreControllerMinuscula %>-entity';
 import { PrincipalController } from 'man-lab-nest';
+import { politicas<%= nombreController %> } from './<%= nombreControllerMinuscula %>-politicas';
+import { mensajes<%= nombreController %> } from './<%= nombreControllerMinuscula %>-mensajes/<%= nombreControllerMinuscula %>.mensajes';
 
 @Controller('<%= nombreControllerMinuscula %>')
 export class <%= nombreController %>Controller extends PrincipalController<<%= nombreController %>Entity, <%= nombreController %>CreateDto, <%= nombreController %>UpdateDto> {
     constructor(private readonly _<%= nombreControllerPrivado %>Service: <%= nombreController %>Service) {
-        super({ // funciones de seguridad
-            findAll: [() => true],
-            findOne: [() => true],
-            createOne: [() => true],
-            updateOne: [() => false],
-            deleteOne: [() => false],
-        }, 
+        super( politicas<%= nombreController %>, // politicas de seguridad
         _<%= nombreControllerPrivado %>Service, //servicio
             { //Dto
                 CreateDto: <%= nombreController %>CreateDto,
@@ -22,12 +18,7 @@ export class <%= nombreController %>Controller extends PrincipalController<<%= n
             },
             0, //skip
             30, //take
-            { //mensajes
-                encontrarUno: 'Id <%= nombreController %> erroneo',
-                crearUno: '<%= nombreController %> inválida',
-                actualizarUno: 'Error actualizando <%= nombreController %>',
-                eliminarUno: 'Error al eliminar una <%= nombreController %>'
-            },
+            mensajes<%= nombreController %>,
             undefined // contexto
             );
             this.contexto = this;

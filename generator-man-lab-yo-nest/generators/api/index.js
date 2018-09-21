@@ -19,18 +19,33 @@ module.exports = class extends Generator {
         const nombreApi = [this.options[ARGUMENTOS.NOMBRE.nombre]];
 
         const opciones = {
-            arguments: [nombreApi]
+            arguments: [nombreApi],
+            version2: true,
         }
+
 
         const directorioDelGeneradorServicio = require.resolve('../service');
         const directorioDelGeneradorController = require.resolve('../controller');
         const directorioDelGeneradorResolver = require.resolve('../resolver');
         const directorioDelGeneradorGateway = require.resolve('../gateway');
+        const directorioDelGeneradorMensajes = require.resolve('../mensajes');
+        const directorioDelGeneradorPoliticas = require.resolve('../politicas');
+        const directorioDelGeneradorEntity = require.resolve('../entity');
+        const directorioDelGeneradorGraphql = require.resolve('../graphql');
+        const directorioDelGeneradorCreateDto = require.resolve('../create-dto');
+        const directorioDelGeneradorUpdateDto = require.resolve('../update-dto');
 
         this.composeWith(directorioDelGeneradorServicio, opciones);
         this.composeWith(directorioDelGeneradorController, opciones);
         this.composeWith(directorioDelGeneradorResolver, opciones);
         this.composeWith(directorioDelGeneradorGateway, opciones);
+        this.composeWith(directorioDelGeneradorMensajes, opciones);
+        this.composeWith(directorioDelGeneradorPoliticas, opciones);
+        this.composeWith(directorioDelGeneradorEntity, opciones);
+        this.composeWith(directorioDelGeneradorGraphql, opciones);
+        this.composeWith(directorioDelGeneradorCreateDto, opciones);
+        this.composeWith(directorioDelGeneradorUpdateDto, opciones);
+
     }
 
     initializing() {

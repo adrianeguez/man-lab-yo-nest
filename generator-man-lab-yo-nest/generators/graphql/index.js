@@ -6,12 +6,12 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: true,
-            desc: 'Nombre del resolver EJ: EmpresaYEcuatoriana'
+            desc: 'Nombre del graphql EJ: EmpresaYEcuatoriana'
         }
     }
 }
 const TEMPLATES = {
-    RESOLVER: 'resolver.ts'
+    GRAPHQL: 'graphql.graphql'
 }
 
 const camelToDash = str => str
@@ -23,26 +23,14 @@ module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
-
-        this.option('types');
-        const types = this.options.types
-        if (types) {
-            const nombreApi = [this.options[ARGUMENTOS.NOMBRE.nombre]];
-            const opciones = {
-                arguments: [nombreApi],
-                version2: true,
-            }
-            const directorioDelGeneradorGraphql = require.resolve('../graphql');
-            this.composeWith(directorioDelGeneradorGraphql, opciones);
-        }
     }
 
     initializing() {
-        // this.log('initializing')
+        this.log('initializing')
     }
 
     async prompting() {
-        // this.log('prompting')
+        this.log('prompting')
         /*
                 const respuestas = await this.prompt([{
                     type: 'input',
@@ -71,17 +59,16 @@ module.exports = class extends Generator {
 
 
     writing() {
-        const nombreResolver = this.options[ARGUMENTOS.NOMBRE.nombre];
-        const nombreResolverMinuscula = camelToDash(nombreResolver);
-        const nombreResolverPrivado = capitalizeFirstLetter(nombreResolver);
-        const template = this.templatePath(TEMPLATES.RESOLVER);
-        const destino = this.destinationPath(`${nombreResolverMinuscula}.resolver.ts`);
+        const nombreGraphql = this.options[ARGUMENTOS.NOMBRE.nombre];
+        const nombreGraphqlMinuscula = camelToDash(nombreGraphql);
+        const nombreGraphqlPrivado = capitalizeFirstLetter(nombreGraphql);
+        const template = this.templatePath(TEMPLATES.GRAPHQL);
+        const destino = this.destinationPath(`${nombreGraphqlMinuscula}.types.graphql`);
         const variables = {
-            nombreResolver,
-            nombreResolverMinuscula,
-            nombreResolverPrivado
+            nombreGraphql,
+            nombreGraphqlMinuscula,
+            nombreGraphqlPrivado
         };
-
         this.fs.copyTpl(
             template,
             destino,
@@ -99,7 +86,7 @@ module.exports = class extends Generator {
 
     end() {
         const nombreServicio = this.options[ARGUMENTOS.NOMBRE.nombre];
-        this.log(`Resolver ${nombreServicio} creado :)`)
+        this.log(`Entity ${nombreServicio} creado :)`)
     }
 
 };

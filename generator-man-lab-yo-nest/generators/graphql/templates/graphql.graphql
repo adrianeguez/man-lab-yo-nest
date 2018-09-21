@@ -1,0 +1,39 @@
+scalar Date
+scalar JSON
+
+type Query {
+  findAll(criterioBusqueda:CriterioBusqueda): [<%= nombreGraphql %>]
+  findOneById(id:String): <%= nombreGraphql %>
+}
+
+type Mutation {
+  createOne(nuevoRegistro:Create<%= nombreGraphql %>Dto!): <%= nombreGraphql %>
+  deleteOne(id:String!): RespuestaEliminar
+  updateOne(id:String!, registroAActualizar:Update<%= nombreGraphql %>Dto!): <%= nombreGraphql %>
+}
+
+
+type <%= nombreGraphql %> {
+  # Llenar Tipo
+}
+
+input Create<%= nombreGraphql %>Dto {
+  # Llenar Create Dto
+}
+
+input Update<%= nombreGraphql %>Dto {
+  # Llenar Update Dto
+}
+
+input CriterioBusqueda {
+  skip: Int
+  take: Int
+  where: JSON
+  relations: JSON
+  join: JSON
+  order: JSON
+}
+
+type RespuestaEliminar{
+  mensaje:String!
+}
