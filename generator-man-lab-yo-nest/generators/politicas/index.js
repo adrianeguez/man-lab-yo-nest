@@ -70,19 +70,19 @@ module.exports = class extends Generator {
         const destinoIndex = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/${nombrePoliticaMinuscula}.politicas.ts`);
 
         const templateFindAll = this.templatePath(TEMPLATES.FIND_ALL);
-        const destinoFindAll = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/find-all.politicas.ts`);
+        const destinoFindAll = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/find-all.${nombrePoliticaMinuscula}.politicas.ts`);
 
         const templateFindOne = this.templatePath(TEMPLATES.FIND_ONE);
-        const destinoFindOne = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/find-one.politicas.ts`);
+        const destinoFindOne = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/find-one.${nombrePoliticaMinuscula}.politicas.ts`);
 
         const templateCreateOne = this.templatePath(TEMPLATES.CREATE_ONE);
-        const destinoCreateOne = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/create-one.politicas.ts`);
+        const destinoCreateOne = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/create-one.${nombrePoliticaMinuscula}.politicas.ts`);
 
         const templateUpdateOne = this.templatePath(TEMPLATES.UPDATE_ONE);
-        const destinoUpdateOne = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/update-one.politicas.ts`);
+        const destinoUpdateOne = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/update-one.${nombrePoliticaMinuscula}.politicas.ts`);
 
         const templateDeleteOne = this.templatePath(TEMPLATES.DELETE_ONE);
-        const destinoDeleteOne = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/delete-one.politicas.ts`);
+        const destinoDeleteOne = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/delete-one.${nombrePoliticaMinuscula}.politicas.ts`);
 
         const variables = {
             nombrePolitica,

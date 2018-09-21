@@ -11,7 +11,8 @@ const ARGUMENTOS = {
     }
 }
 const TEMPLATES = {
-    GATEWAY: 'gateway.ts'
+    GATEWAY: 'gateway.ts',
+    GATEWAYV2: 'gateway-version-2.ts'
 }
 const OPCIONES = {
     puerto: 'puerto',
@@ -28,6 +29,7 @@ module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
+        this.option('version2');
     }
 
     initializing() {
@@ -67,7 +69,12 @@ module.exports = class extends Generator {
         const nombreGateway = this.options[ARGUMENTOS.NOMBRE.nombre];
         const nombreGatewayMinuscula = camelToDash(nombreGateway);
         const nombreGatewayPrivado = capitalizeFirstLetter(nombreGateway);
-        const template = this.templatePath(TEMPLATES.GATEWAY);
+        let template
+        if (version2) {
+            template = this.templatePath(TEMPLATES.GATEWAYV2);
+        } else {
+            template = this.templatePath(TEMPLATES.GATEWAY);
+        }
         const destino = this.destinationPath(`${nombreGatewayMinuscula}.gateway.ts`);
         const ip = this.options[OPCIONES.ip] ? this.options[OPCIONES.ip] : "http://localhost";
         const puerto = this.options[OPCIONES.puerto] ? this.options[OPCIONES.puerto] : "3001";

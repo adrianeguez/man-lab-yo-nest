@@ -2,14 +2,14 @@ scalar Date
 scalar JSON
 
 type Query {
-  findAll(criterioBusqueda:CriterioBusqueda): [<%= nombreGraphql %>]
-  findOneById(id:String): <%= nombreGraphql %>
+  findAll<%= nombreGraphql %>(criterioBusqueda:CriterioBusqueda): [<%= nombreGraphql %>]
+  findOne<%= nombreGraphql %>ById(id:String): <%= nombreGraphql %>
 }
 
 type Mutation {
-  createOne(nuevoRegistro:Create<%= nombreGraphql %>Dto!): <%= nombreGraphql %>
-  deleteOne(id:String!): RespuestaEliminar
-  updateOne(id:String!, registroAActualizar:Update<%= nombreGraphql %>Dto!): <%= nombreGraphql %>
+  createOne<%= nombreGraphql %>(nuevoRegistro:Create<%= nombreGraphql %>Dto!): <%= nombreGraphql %>
+  deleteOne<%= nombreGraphql %>(id:String!): RespuestaEliminar
+  updateOne<%= nombreGraphql %>(id:String!, registroAActualizar:Update<%= nombreGraphql %>Dto!): <%= nombreGraphql %>
 }
 
 

@@ -2,14 +2,12 @@ import { Controller } from '@nestjs/common';
 import { <%= nombreController %>Service } from './<%= nombreControllerMinuscula %>.service';
 import { <%= nombreController %>UpdateDto } from './<%= nombreControllerMinuscula %>-update-dto/<%= nombreControllerMinuscula %>-update-dto';
 import { <%= nombreController %>CreateDto } from './<%= nombreControllerMinuscula %>-create-dto/<%= nombreControllerMinuscula %>-create-dto';
-import { <%= nombreController %>Entity } from './<%= nombreControllerMinuscula %>-entity';
 import { PrincipalController } from 'man-lab-nest';
-import { politicas<%= nombreController %> } from './<%= nombreControllerMinuscula %>-politicas';
+import { politicas<%= nombreController %> } from './<%= nombreControllerMinuscula %>-politicas/<%= nombreControllerMinuscula %>.politicas';
 import { mensajes<%= nombreController %> } from './<%= nombreControllerMinuscula %>-mensajes/<%= nombreControllerMinuscula %>.mensajes';
 
 @Controller('<%= nombreControllerMinuscula %>')
-export class <%= nombreController %>Controller extends PrincipalController<<%= nombreController %>Entity, <%= nombreController %>CreateDto, <%= nombreController %>UpdateDto> {
-    constructor(private readonly _<%= nombreControllerPrivado %>Service: <%= nombreController %>Service) {
+export class <%= nombreController %>Controller extends PrincipalController<<%= nombreController %>CreateDto, <%= nombreController %>UpdateDto> {    constructor(private readonly _<%= nombreControllerPrivado %>Service: <%= nombreController %>Service) {
         super( politicas<%= nombreController %>, // politicas de seguridad
         _<%= nombreControllerPrivado %>Service, //servicio
             { //Dto

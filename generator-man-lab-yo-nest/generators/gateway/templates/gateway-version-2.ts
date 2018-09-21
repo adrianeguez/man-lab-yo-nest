@@ -3,6 +3,8 @@ import { PrincipalGateway } from 'man-lab-nest';
 import { <%= nombreGateway %>Service } from "./<%= nombreGatewayMinuscula %>.service";
 import { <%= nombreGateway %>CreateDto } from "./<%= nombreGatewayMinuscula %>-create-dto/<%= nombreGatewayMinuscula %>-create-dto";
 import { <%= nombreGateway %>UpdateDto } from "./<%= nombreGatewayMinuscula %>-update-dto/<%= nombreGatewayMinuscula %>-update-dto";
+import { politicas<%= nombreGateway %> } from './<%= nombreGatewayMinuscula %>-politicas';
+import { mensajes<%= nombreGateway %> } from './<%= nombreGatewayMinuscula %>-mensajes/<%= nombreGatewayMinuscula %>.mensajes';
 
 @WebSocketGateway(<%= puerto? puerto:3001 %>, { namespace: '/<%= nombreGatewayMinuscula %>' })
 export class <%= nombreGateway %>Gateway extends PrincipalGateway {
@@ -30,13 +32,7 @@ export class <%= nombreGateway %>Gateway extends PrincipalGateway {
                     funcionJoin:undefined
                 }
             },
-            { // Funciones seguridad
-                createOne:[],
-                updateOne:[],
-                findOne:[],
-                deleteOne:[],
-                findAll:[]
-            }, 
+            politicas<%= nombreGateway %>, // politicas de seguridad 
             _<%= nombreGatewayPrivado %>Service, // servicio
             {  // Dto
                 CreateDto: <%= nombreGateway %>CreateDto,
@@ -44,12 +40,7 @@ export class <%= nombreGateway %>Gateway extends PrincipalGateway {
             },
             0, // take
             30, // skip
-            { // mensaje
-                encontrarUno: 'Id <%= nombreGateway %> erroneo',
-                crearUno: '<%= nombreGateway %> inválida',
-                actualizarUno: 'Error actualizando <%= nombreGateway %>',
-                eliminarUno: 'Error al eliminar una <%= nombreGateway %>'
-            },
+            mensajes<%= nombreGateway %>,
             undefined)
         this.contexto = this;
     }

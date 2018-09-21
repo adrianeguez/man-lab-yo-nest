@@ -11,7 +11,8 @@ const ARGUMENTOS = {
     }
 }
 const TEMPLATES = {
-    RESOLVER: 'resolver.ts'
+    RESOLVER: 'resolver.ts',
+    RESOLVERV2: 'resolver-version-2.ts',
 }
 
 const camelToDash = str => str
@@ -23,6 +24,7 @@ module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
+        this.option('version2');
 
         this.option('types');
         const types = this.options.types
@@ -74,7 +76,14 @@ module.exports = class extends Generator {
         const nombreResolver = this.options[ARGUMENTOS.NOMBRE.nombre];
         const nombreResolverMinuscula = camelToDash(nombreResolver);
         const nombreResolverPrivado = capitalizeFirstLetter(nombreResolver);
-        const template = this.templatePath(TEMPLATES.RESOLVER);
+        const version2 = this.options.version2
+        let template
+        if (version2) {
+            template = this.templatePath(TEMPLATES.CONTROLLERV2);
+        } else {
+            template = this.templatePath(TEMPLATES.RESOLVER);
+        }
+
         const destino = this.destinationPath(`${nombreResolverMinuscula}.resolver.ts`);
         const variables = {
             nombreResolver,

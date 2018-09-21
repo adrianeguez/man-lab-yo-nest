@@ -1,7 +1,5 @@
-import { PrincipalEntity } from 'man-lab-nest';
-import { Column, Entity } from 'typeorm';
+import {  } from "class-validator";
+import { PrincipalDto } from 'man-lab-nest';
 
-@Entity('<%= nombreCreateDtoMinuscula %>')
-export class <%= nombreCreateDto %>Entity extends PrincipalEntity {
-
+export class <%= nombreCreateDto %>CreateDto extends PrincipalDto {
 }

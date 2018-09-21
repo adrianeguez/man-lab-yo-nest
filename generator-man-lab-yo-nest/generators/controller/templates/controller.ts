@@ -2,11 +2,10 @@ import { Controller } from '@nestjs/common';
 import { <%= nombreController %>Service } from './<%= nombreControllerMinuscula %>.service';
 import { <%= nombreController %>UpdateDto } from './<%= nombreControllerMinuscula %>-update-dto/<%= nombreControllerMinuscula %>-update-dto';
 import { <%= nombreController %>CreateDto } from './<%= nombreControllerMinuscula %>-create-dto/<%= nombreControllerMinuscula %>-create-dto';
-import { <%= nombreController %>Entity } from './<%= nombreControllerMinuscula %>-entity';
 import { PrincipalController } from 'man-lab-nest';
 
 @Controller('<%= nombreControllerMinuscula %>')
-export class <%= nombreController %>Controller extends PrincipalController<<%= nombreController %>Entity, <%= nombreController %>CreateDto, <%= nombreController %>UpdateDto> {
+export class <%= nombreController %>Controller extends PrincipalController<<%= nombreController %>CreateDto, <%= nombreController %>UpdateDto> {
     constructor(private readonly _<%= nombreControllerPrivado %>Service: <%= nombreController %>Service) {
         super({ // funciones de seguridad
             findAll: [() => true],
