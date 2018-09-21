@@ -69,6 +69,8 @@ module.exports = class extends Generator {
         const nombreGateway = this.options[ARGUMENTOS.NOMBRE.nombre];
         const nombreGatewayMinuscula = camelToDash(nombreGateway);
         const nombreGatewayPrivado = capitalizeFirstLetter(nombreGateway);
+
+        const version2 = this.options.version2
         let template
         if (version2) {
             template = this.templatePath(TEMPLATES.GATEWAYV2);

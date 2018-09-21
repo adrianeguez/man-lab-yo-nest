@@ -79,7 +79,7 @@ module.exports = class extends Generator {
         const version2 = this.options.version2
         let template
         if (version2) {
-            template = this.templatePath(TEMPLATES.CONTROLLERV2);
+            template = this.templatePath(TEMPLATES.RESOLVERV2);
         } else {
             template = this.templatePath(TEMPLATES.RESOLVER);
         }

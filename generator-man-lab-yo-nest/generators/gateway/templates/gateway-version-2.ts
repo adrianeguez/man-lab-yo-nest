@@ -3,7 +3,7 @@ import { PrincipalGateway } from 'man-lab-nest';
 import { <%= nombreGateway %>Service } from "./<%= nombreGatewayMinuscula %>.service";
 import { <%= nombreGateway %>CreateDto } from "./<%= nombreGatewayMinuscula %>-create-dto/<%= nombreGatewayMinuscula %>-create-dto";
 import { <%= nombreGateway %>UpdateDto } from "./<%= nombreGatewayMinuscula %>-update-dto/<%= nombreGatewayMinuscula %>-update-dto";
-import { politicas<%= nombreGateway %> } from './<%= nombreGatewayMinuscula %>-politicas';
+import { politicas<%= nombreGateway %> } from './<%= nombreGatewayMinuscula %>-politicas/<%= nombreGatewayMinuscula %>.politicas';
 import { mensajes<%= nombreGateway %> } from './<%= nombreGatewayMinuscula %>-mensajes/<%= nombreGatewayMinuscula %>.mensajes';
 
 @WebSocketGateway(<%= puerto? puerto:3001 %>, { namespace: '/<%= nombreGatewayMinuscula %>' })
