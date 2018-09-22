@@ -32,7 +32,7 @@ input CriterioBusqueda {
   skip: Int
   take: Int
   where: JSON
-  relations: JSON
+  relations: [String]
   join: JSON
   order: JSON
 }
