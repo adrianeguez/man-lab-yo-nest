@@ -4,6 +4,7 @@ scalar JSON
 type Query {
   findAll<%= nombreGraphql %>(criterioBusqueda:CriterioBusqueda): [<%= nombreGraphql %>]
   findOne<%= nombreGraphql %>ById(id:String): <%= nombreGraphql %>
+  query<%= nombreGraphql %>ById(id:String): Int
 }
 
 type Mutation {

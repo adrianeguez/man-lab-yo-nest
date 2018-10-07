@@ -47,6 +47,18 @@ export class <%= nombreResolver %>Resolver extends PrincipalResolver {
         return this.findAll(criterioBusqueda, args, context, info, parent, root);
     }
 
+    @Query('query<%= nombreResolver %>')
+    query<%= nombreResolver %>(
+        @Args('criterioBusqueda') criterioBusqueda: string,
+        @Args() args,
+        @Context() context,
+        @Info() info,
+        @Parent() parent,
+        @Root() root,
+    ) {
+        return this.count(criterioBusqueda, args, context, info, parent, root);
+    }
+
     @Query('findOne<%= nombreResolver %>ById')
     findOne<%= nombreResolver %>ById(
         @Args('id') id,
