@@ -1,4 +1,4 @@
-import { PrincipalEntity } from 'man-lab-nest';
+import { PrincipalEntity } from '@manticore-labs/nest';
 import { Column, Entity } from 'typeorm';
 
 @Entity('<%= nombreEntityMinuscula %>')

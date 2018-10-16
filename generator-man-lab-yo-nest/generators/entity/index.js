@@ -9,10 +9,10 @@ const ARGUMENTOS = {
             desc: 'Nombre del entity EJ: EmpresaYEcuatoriana'
         }
     }
-}
+};
 const TEMPLATES = {
     ENTITY: 'entity.ts'
-}
+};
 
 const camelToDash = str => str
     .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
@@ -41,6 +41,7 @@ module.exports = class extends Generator {
         // this.log('Nombre del servicio', this.option(ARGUMENTOS.NOMBRE.nombre));
 
     }
+
     configuring() {
         // this.log('configuring ')
     }

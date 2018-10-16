@@ -24,7 +24,7 @@ module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
-        this.option('version2');
+        this.option('version1');
 
         this.option('types');
         const types = this.options.types
@@ -76,12 +76,12 @@ module.exports = class extends Generator {
         const nombreResolver = this.options[ARGUMENTOS.NOMBRE.nombre];
         const nombreResolverMinuscula = camelToDash(nombreResolver);
         const nombreResolverPrivado = capitalizeFirstLetter(nombreResolver);
-        const version2 = this.options.version2
+        const version1 = this.options.version1
         let template
-        if (version2) {
-            template = this.templatePath(TEMPLATES.RESOLVERV2);
-        } else {
+        if (version1) {
             template = this.templatePath(TEMPLATES.RESOLVER);
+        } else {
+            template = this.templatePath(TEMPLATES.RESOLVERV2);
         }
 
         const destino = this.destinationPath(`${nombreResolverMinuscula}.resolver.ts`);

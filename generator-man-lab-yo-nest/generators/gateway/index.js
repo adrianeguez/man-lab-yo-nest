@@ -9,16 +9,16 @@ const ARGUMENTOS = {
             desc: 'Nombre del resolver EJ: EmpresaYEcuatoriana'
         }
     }
-}
+};
 const TEMPLATES = {
     GATEWAY: 'gateway.ts',
     GATEWAYV2: 'gateway-version-2.ts'
-}
+};
 const OPCIONES = {
     puerto: 'puerto',
     ip: 'ip',
     secreto: 'secreto'
-}
+};
 
 const camelToDash = str => str
     .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
@@ -29,7 +29,7 @@ module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
-        this.option('version2');
+        this.option('version1');
     }
 
     initializing() {
@@ -48,6 +48,7 @@ module.exports = class extends Generator {
         // this.log('Nombre del servicio', this.option(ARGUMENTOS.NOMBRE.nombre));
 
     }
+
     configuring() {
         // this.log('configuring ')
     }
@@ -70,12 +71,12 @@ module.exports = class extends Generator {
         const nombreGatewayMinuscula = camelToDash(nombreGateway);
         const nombreGatewayPrivado = capitalizeFirstLetter(nombreGateway);
 
-        const version2 = this.options.version2
-        let template
-        if (version2) {
-            template = this.templatePath(TEMPLATES.GATEWAYV2);
-        } else {
+        const version1 = this.options.version1;
+        let template;
+        if (version1) {
             template = this.templatePath(TEMPLATES.GATEWAY);
+        } else {
+            template = this.templatePath(TEMPLATES.GATEWAYV2);
         }
         const destino = this.destinationPath(`${nombreGatewayMinuscula}.gateway.ts`);
         const ip = this.options[OPCIONES.ip] ? this.options[OPCIONES.ip] : "http://localhost";

@@ -9,7 +9,7 @@ const ARGUMENTOS = {
             desc: 'Nombre del archivo de mensajes EJ: EmpresaYEcuatoriana'
         }
     }
-}
+};
 const TEMPLATES = {
     INDEX: 'index.politicas.ts',
     CREATE_ONE: 'create-one.politicas.ts',
@@ -17,7 +17,9 @@ const TEMPLATES = {
     FIND_ALL: 'find-all.politicas.ts',
     FIND_ONE: 'find-one.politicas.ts',
     UPDATE_ONE: 'update-one.politicas.ts',
-}
+    COUNT: 'count.politicas.ts',
+    FIND_WHERE_OR: 'find-where-or.politicas.ts',
+};
 
 const camelToDash = str => str
     .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
@@ -46,6 +48,7 @@ module.exports = class extends Generator {
         // this.log('Nombre del servicio', this.option(ARGUMENTOS.NOMBRE.nombre));
 
     }
+
     configuring() {
         // this.log('configuring ')
     }
@@ -84,6 +87,12 @@ module.exports = class extends Generator {
         const templateDeleteOne = this.templatePath(TEMPLATES.DELETE_ONE);
         const destinoDeleteOne = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/delete-one.${nombrePoliticaMinuscula}.politicas.ts`);
 
+        const templateCount = this.templatePath(TEMPLATES.COUNT);
+        const destinoCount = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/count.${nombrePoliticaMinuscula}.politicas.ts`);
+
+        const templateFindWhereOr = this.templatePath(TEMPLATES.FIND_WHERE_OR);
+        const destinoFindWhereOr = this.destinationPath(`${nombrePoliticaMinuscula}-politicas/find-where-or.${nombrePoliticaMinuscula}.politicas.ts`);
+
         const variables = {
             nombrePolitica,
             nombrePoliticaMinuscula
@@ -120,6 +129,16 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
             templateDeleteOne,
             destinoDeleteOne
+        );
+
+        this.fs.copyTpl(
+            templateCount,
+            destinoCount
+        );
+
+        this.fs.copyTpl(
+            templateFindWhereOr,
+            destinoFindWhereOr
         );
     }
 

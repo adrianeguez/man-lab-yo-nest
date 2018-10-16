@@ -1,10 +1,11 @@
 import { Resolver, Query, Args, Context, Info, Parent, Root, Mutation } from "@nestjs/graphql";
-import { PrincipalResolver } from 'man-lab-nest';
+import { PrincipalResolver } from '@manticore-labs/nest';
 import { <%= nombreResolver %>Service } from "./<%= nombreResolverMinuscula %>.service";
 import { <%= nombreResolver %>CreateDto } from "./<%= nombreResolverMinuscula %>-create-dto/<%= nombreResolverMinuscula %>-create-dto";
 import { <%= nombreResolver %>UpdateDto } from "./<%= nombreResolverMinuscula %>-update-dto/<%= nombreResolverMinuscula %>-update-dto";
 import { politicas<%= nombreResolver %> } from './<%= nombreResolverMinuscula %>-politicas';
 import { mensajes<%= nombreResolver %> } from './<%= nombreResolverMinuscula %>-mensajes/<%= nombreResolverMinuscula %>.mensajes';
+import {Observable} from 'rxjs';
 
 @Resolver('<%= nombreResolver %>')
 export class <%= nombreResolver %>Resolver extends PrincipalResolver {
@@ -36,27 +37,27 @@ export class <%= nombreResolver %>Resolver extends PrincipalResolver {
 
 
     @Query('findAll<%= nombreResolver %>')
-    findAll<%= nombreResolver %>(
-        @Args('criterioBusqueda') criterioBusqueda: string,
-        @Args() args,
-        @Context() context,
-        @Info() info,
-        @Parent() parent,
-        @Root() root,
+        findAll<%= nombreResolver %>(
+            @Args('criterioBusqueda') criterioBusqueda: string,
+            @Args() args,
+            @Context() context,
+            @Info() info,
+            @Parent() parent,
+            @Root() root,
     ) {
-        return this.findAll(criterioBusqueda, args, context, info, parent, root);
+        return this.devolverRespuesta('findAll', criterioBusqueda, args, context, info, parent, root);
     }
 
-    @Query('query<%= nombreResolver %>')
-    query<%= nombreResolver %>(
-        @Args('criterioBusqueda') criterioBusqueda: string,
-        @Args() args,
-        @Context() context,
-        @Info() info,
-        @Parent() parent,
-        @Root() root,
+    @Query('findWhereOr<%= nombreResolver %>')
+        findWhereOr<%= nombreResolver %>(
+            @Args('criterioBusqueda') criterioBusqueda: string,
+            @Args() args,
+            @Context() context,
+            @Info() info,
+            @Parent() parent,
+            @Root() root,
     ) {
-        return this.count(criterioBusqueda, args, context, info, parent, root);
+        return this.devolverRespuesta('findWhereOr', criterioBusqueda, args, context, info, parent, root);
     }
 
     @Query('findOne<%= nombreResolver %>ById')
@@ -106,6 +107,34 @@ export class <%= nombreResolver %>Resolver extends PrincipalResolver {
         @Root() root,
     ) {
         return this.updateOne(id, registroAActualizar, args, context, info, parent, root);
+    }
+
+    devolverRespuesta(tipo, criterioBusqueda, args, context, info, parent, root) {
+        return new Promise((resolve, reject) => {
+            let servicio;
+            if (tipo === 'findAll') {
+                servicio = this.findAll(criterioBusqueda, args, context, info, parent, root)
+            } else {
+                servicio = this.findWhereOr(criterioBusqueda, args, context, info, parent, root)
+            }
+            servicio
+                .then(
+                    (r: Observable<[[any], 0]>) => {
+                        r.subscribe(
+                            (c) => {
+                                resolve({registros: c[0], numero: c[1]});
+                            }
+                        );
+
+                    }
+                )
+                .catch(
+                    (e) => {
+                        console.error('Error',e);
+                        resolve({registros: [], numero: 0});
+                    }
+                );
+        });
     }
 
 }

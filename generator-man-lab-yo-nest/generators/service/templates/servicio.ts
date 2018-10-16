@@ -4,13 +4,13 @@ import { <%= nombreServicio %>CreateDto } from './<%= nombreServicioMinuscula %>
 import { <%= nombreServicio %>Entity } from './<%= nombreServicioMinuscula %>.entity';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { PrincipalService } from 'man-lab-nest';
+import { PrincipalService } from '@manticore-labs/nest';
 
 
 @Injectable()
 export class <%= nombreServicio %>Service extends PrincipalService<<%= nombreServicio %>Entity, <%= nombreServicio %>CreateDto, <%= nombreServicio %>UpdateDto> {
     constructor(@InjectRepository(<%= nombreServicio %>Entity)
     private readonly _<%= nombreServicioPrivado %>Repository: Repository<<%= nombreServicio %>Entity>) {
-        super(_<%= nombreServicioPrivado %>Repository)
+        super(_<%= nombreServicioPrivado %>Repository, <%= nombreServicio %>Entity, 'default')
     }
 }

@@ -9,11 +9,11 @@ const ARGUMENTOS = {
             desc: 'Nombre del controlador EJ: EmpresaYEcuatoriana'
         }
     }
-}
+};
 const TEMPLATES = {
     CONTROLLER: 'controller.ts',
     CONTROLLERV2: 'controller-version-2.ts'
-}
+};
 
 const camelToDash = str => str
     .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
@@ -24,7 +24,7 @@ module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
-        this.option('version2');
+        this.option('version1');
     }
 
     initializing() {
@@ -43,6 +43,7 @@ module.exports = class extends Generator {
         // this.log('Nombre del servicio', this.option(ARGUMENTOS.NOMBRE.nombre));
 
     }
+
     configuring() {
         // this.log('configuring ')
     }
@@ -64,13 +65,12 @@ module.exports = class extends Generator {
         const nombreController = this.options[ARGUMENTOS.NOMBRE.nombre];
         const nombreControllerMinuscula = camelToDash(nombreController);
         const nombreControllerPrivado = capitalizeFirstLetter(nombreController);
-        const version2 = this.options.version2
-        let template
-        console.log('version2', version2);
-        if (version2) {
-            template = this.templatePath(TEMPLATES.CONTROLLERV2);
-        } else {
+        const version1 = this.options.version1;
+        let template;
+        if (version1) {
             template = this.templatePath(TEMPLATES.CONTROLLER);
+        } else {
+            template = this.templatePath(TEMPLATES.CONTROLLERV2);
         }
         const destino = this.destinationPath(`${nombreControllerMinuscula}.controller.ts`);
         const variables = {

@@ -2,15 +2,15 @@ scalar Date
 scalar JSON
 
 type Query {
-  findAll<%= nombreGraphql %>(criterioBusqueda:CriterioBusqueda): [<%= nombreGraphql %>]
+  findAll<%= nombreGraphql %>(criterioBusqueda:CriterioBusquedaFindAll): RespuestaFind<%= nombreGraphql %>
+  findWhereOr<%= nombreGraphql %>(criterioBusqueda:CriterioBusquedaFindWhereOr!): RespuestaFind<%= nombreGraphql %>
   findOne<%= nombreGraphql %>ById(id:String): <%= nombreGraphql %>
-  query<%= nombreGraphql %>ById(id:String): Int
 }
 
 type Mutation {
-  createOne<%= nombreGraphql %>(nuevoRegistro:Create<%= nombreGraphql %>Dto!): <%= nombreGraphql %>
+  createOne<%= nombreGraphql %>(nuevoRegistro:Create<%= nombreGraphql %>Dto!): <%= nombreGraphql %>CreadoOActualizado
   deleteOne<%= nombreGraphql %>(id:String!): RespuestaEliminar
-  updateOne<%= nombreGraphql %>(id:String!, registroAActualizar:Update<%= nombreGraphql %>Dto!): <%= nombreGraphql %>
+  updateOne<%= nombreGraphql %>(id:String!, registroAActualizar:Update<%= nombreGraphql %>Dto!): <%= nombreGraphql %>CreadoOActualizado
 }
 
 
@@ -29,7 +29,7 @@ input Update<%= nombreGraphql %>Dto {
   # Llenar Update Dto
 }
 
-input CriterioBusqueda {
+input CriterioBusquedaFindAll {
   skip: Int
   take: Int
   where: JSON
@@ -38,6 +38,36 @@ input CriterioBusqueda {
   order: JSON
 }
 
+input CriterioBusquedaFindWhereOr {
+  camposABuscar: [CamposABuscar]!
+  skip: Int
+  take: Int
+  relations: [FindWhereRelations]
+}
+
+input CamposABuscar {
+  campo: String!
+  valor: String!
+}
+
+type FindWhereRelations{
+  entidad: String!
+  key: String!
+  query: [CamposABuscar]
+}
+
 type RespuestaEliminar{
   mensaje:String!
+}
+
+type <%= nombreGraphql %>CreadoOActualizado {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+    # creado o actualizado
+}
+
+type RespuestaFind<%= nombreGraphql %> {
+    registros:[<%= nombreGraphql %>]
+    numero:Int
 }

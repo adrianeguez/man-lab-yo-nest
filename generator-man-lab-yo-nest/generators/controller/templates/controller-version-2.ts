@@ -2,9 +2,9 @@ import { Controller } from '@nestjs/common';
 import { <%= nombreController %>Service } from './<%= nombreControllerMinuscula %>.service';
 import { <%= nombreController %>UpdateDto } from './<%= nombreControllerMinuscula %>-update-dto/<%= nombreControllerMinuscula %>-update-dto';
 import { <%= nombreController %>CreateDto } from './<%= nombreControllerMinuscula %>-create-dto/<%= nombreControllerMinuscula %>-create-dto';
-import { PrincipalController } from 'man-lab-nest';
 import { politicas<%= nombreController %> } from './<%= nombreControllerMinuscula %>-politicas/<%= nombreControllerMinuscula %>.politicas';
 import { mensajes<%= nombreController %> } from './<%= nombreControllerMinuscula %>-mensajes/<%= nombreControllerMinuscula %>.mensajes';
+import { PrincipalController } from '@manticore-labs/nest';
 
 @Controller('<%= nombreControllerMinuscula %>')
 export class <%= nombreController %>Controller extends PrincipalController<<%= nombreController %>CreateDto, <%= nombreController %>UpdateDto> {    constructor(private readonly _<%= nombreControllerPrivado %>Service: <%= nombreController %>Service) {

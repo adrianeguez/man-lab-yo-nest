@@ -1,5 +1,5 @@
 import { WebSocketGateway } from "@nestjs/websockets";
-import { PrincipalGateway } from 'man-lab-nest';
+import { PrincipalGateway } from '@manticore-labs/nest';
 import { <%= nombreGateway %>Service } from "./<%= nombreGatewayMinuscula %>.service";
 import { <%= nombreGateway %>CreateDto } from "./<%= nombreGatewayMinuscula %>-create-dto/<%= nombreGatewayMinuscula %>-create-dto";
 import { <%= nombreGateway %>UpdateDto } from "./<%= nombreGatewayMinuscula %>-update-dto/<%= nombreGatewayMinuscula %>-update-dto";
