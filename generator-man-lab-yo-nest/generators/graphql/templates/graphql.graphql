@@ -50,7 +50,7 @@ input CamposABuscar {
   valor: String!
 }
 
-type FindWhereRelations{
+input FindWhereRelations{
   entidad: String!
   key: String!
   query: [CamposABuscar]
