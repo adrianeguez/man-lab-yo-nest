@@ -14,5 +14,5 @@ export const politicas<%= nombrePolitica %>: FuncionesSeguridad = {
     updateOne: UPDATE_ONE_POLITICAS,
     deleteOne: DELETE_ONE_POLITICAS,
     count: COUNT_POLITICAS,
-    findWhereOr: FIND_WHERE_OR_POLITICAS
-}
+    findWhereOr: FIND_WHERE_OR_POLITICAS,
+};
