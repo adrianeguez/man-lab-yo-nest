@@ -1,8 +1,8 @@
-import { Resolver, Query, Args, Context, Info, Parent, Root, Mutation } from "@nestjs/graphql";
+import { Resolver, Query, Args, Context, Info, Parent, Root, Mutation } from '@nestjs/graphql';
 import { PrincipalResolver } from '@manticore-labs/nest';
-import { <%= nombreResolver %>Service } from "./<%= nombreResolverMinuscula %>.service";
-import { <%= nombreResolver %>CreateDto } from "./<%= nombreResolverMinuscula %>-create-dto/<%= nombreResolverMinuscula %>-create-dto";
-import { <%= nombreResolver %>UpdateDto } from "./<%= nombreResolverMinuscula %>-update-dto/<%= nombreResolverMinuscula %>-update-dto";
+import { <%= nombreResolver %>Service } from './<%= nombreResolverMinuscula %>.service';
+import { <%= nombreResolver %>CreateDto } from './<%= nombreResolverMinuscula %>-create-dto/<%= nombreResolverMinuscula %>-create-dto';
+import { <%= nombreResolver %>UpdateDto } from './<%= nombreResolverMinuscula %>-update-dto/<%= nombreResolverMinuscula %>-update-dto';
 import { politicas<%= nombreResolver %> } from './<%= nombreResolverMinuscula %>-politicas';
 import { mensajes<%= nombreResolver %> } from './<%= nombreResolverMinuscula %>-mensajes/<%= nombreResolverMinuscula %>.mensajes';
 import {Observable} from 'rxjs';
@@ -110,12 +110,12 @@ export class <%= nombreResolver %>Resolver extends PrincipalResolver {
     }
 
     devolverRespuesta(tipo, criterioBusqueda, args, context, info, parent, root) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             let servicio;
             if (tipo === 'findAll') {
-                servicio = this.findAll(criterioBusqueda, args, context, info, parent, root)
+                servicio = this.findAll(criterioBusqueda, args, context, info, parent, root);
             } else {
-                servicio = this.findWhereOr(criterioBusqueda, args, context, info, parent, root)
+                servicio = this.findWhereOr(criterioBusqueda, args, context, info, parent, root);
             }
             servicio
                 .then(
@@ -130,7 +130,7 @@ export class <%= nombreResolver %>Resolver extends PrincipalResolver {
                 )
                 .catch(
                     (e) => {
-                        console.error('Error',e);
+                        console.error('Error', e);
                         resolve({registros: [], numero: 0});
                     }
                 );

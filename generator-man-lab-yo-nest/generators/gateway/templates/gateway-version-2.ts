@@ -1,8 +1,8 @@
-import { WebSocketGateway } from "@nestjs/websockets";
+import { WebSocketGateway } from '@nestjs/websockets';
 import { PrincipalGateway } from '@manticore-labs/nest';
-import { <%= nombreGateway %>Service } from "./<%= nombreGatewayMinuscula %>.service";
-import { <%= nombreGateway %>CreateDto } from "./<%= nombreGatewayMinuscula %>-create-dto/<%= nombreGatewayMinuscula %>-create-dto";
-import { <%= nombreGateway %>UpdateDto } from "./<%= nombreGatewayMinuscula %>-update-dto/<%= nombreGatewayMinuscula %>-update-dto";
+import { <%= nombreGateway %>Service } from './<%= nombreGatewayMinuscula %>.service';
+import { <%= nombreGateway %>CreateDto } from './<%= nombreGatewayMinuscula %>-create-dto/<%= nombreGatewayMinuscula %>-create-dto';
+import { <%= nombreGateway %>UpdateDto } from './<%= nombreGatewayMinuscula %>-update-dto/<%= nombreGatewayMinuscula %>-update-dto';
 import { politicas<%= nombreGateway %> } from './<%= nombreGatewayMinuscula %>-politicas/<%= nombreGatewayMinuscula %>.politicas';
 import { mensajes<%= nombreGateway %> } from './<%= nombreGatewayMinuscula %>-mensajes/<%= nombreGatewayMinuscula %>.mensajes';
 
@@ -14,25 +14,25 @@ export class <%= nombreGateway %>Gateway extends PrincipalGateway {
             '/<%= nombreGatewayMinuscula %>',
             '<%= secreto? secreto:'secreto' %>',
             { // funciones gateway
-                afterInit:undefined, 
-                handleConnection:undefined, 
-                handleDisconnect:undefined
-            }, 
+                afterInit: undefined,
+                handleConnection: undefined,
+                handleDisconnect: undefined
+            },
             { // funciones broadcast
                 createOne: {
                     broadcast: true,
-                    funcionJoin:undefined
+                    funcionJoin: undefined
                 },
                 deleteOne: {
                     broadcast: true,
-                    funcionJoin:undefined
+                    funcionJoin: undefined
                 },
                 updateOne: {
                     broadcast: true,
-                    funcionJoin:undefined
+                    funcionJoin: undefined
                 }
             },
-            politicas<%= nombreGateway %>, // politicas de seguridad 
+            politicas<%= nombreGateway %>, // politicas de seguridad
             _<%= nombreGatewayPrivado %>Service, // servicio
             {  // Dto
                 CreateDto: <%= nombreGateway %>CreateDto,
@@ -41,7 +41,7 @@ export class <%= nombreGateway %>Gateway extends PrincipalGateway {
             0, // take
             30, // skip
             mensajes<%= nombreGateway %>,
-            undefined)
+            undefined);
         this.contexto = this;
     }
 

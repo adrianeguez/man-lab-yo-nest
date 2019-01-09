@@ -7,15 +7,18 @@ import { mensajes<%= nombreController %> } from './<%= nombreControllerMinuscula
 import { PrincipalController } from '@manticore-labs/nest';
 
 @Controller('<%= nombreControllerMinuscula %>')
-export class <%= nombreController %>Controller extends PrincipalController<<%= nombreController %>CreateDto, <%= nombreController %>UpdateDto> {    constructor(private readonly _<%= nombreControllerPrivado %>Service: <%= nombreController %>Service) {
+export class <%= nombreController %>Controller extends PrincipalController<
+    <%= nombreController %>CreateDto,
+    <%= nombreController %>UpdateDto> {
+    constructor(private readonly _<%= nombreControllerPrivado %>Service: <%= nombreController %>Service) {
         super( politicas<%= nombreController %>, // politicas de seguridad
-        _<%= nombreControllerPrivado %>Service, //servicio
-            { //Dto
+        _<%= nombreControllerPrivado %>Service, // servicio
+            { // Dto
                 CreateDto: <%= nombreController %>CreateDto,
                 UpdateDto: <%= nombreController %>UpdateDto
             },
-            0, //skip
-            30, //take
+            0, // skip
+            30, // take
             mensajes<%= nombreController %>,
             undefined // contexto
             );
@@ -23,4 +26,3 @@ export class <%= nombreController %>Controller extends PrincipalController<<%= n
     }
 
 }
-
