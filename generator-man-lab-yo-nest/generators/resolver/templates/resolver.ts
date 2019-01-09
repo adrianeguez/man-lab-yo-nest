@@ -24,7 +24,7 @@ export class <%= nombreResolver %>Resolver extends PrincipalResolver {
             },
             0, // skip
             30, // take
-            { //mensajes
+            { // mensajes
                 encontrarUno: 'Id <%= nombreResolver %> erroneo',
                 crearUno: '<%= nombreResolver %> inválida',
                 actualizarUno: 'Error actualizando <%= nombreResolver %>',
