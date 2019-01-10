@@ -31,7 +31,6 @@ export class <%= nombreController %>Controller extends PrincipalController<
             },
             undefined // contexto
             );
-            this.contexto = this;
+        this.contexto = this;
     }
-
 }

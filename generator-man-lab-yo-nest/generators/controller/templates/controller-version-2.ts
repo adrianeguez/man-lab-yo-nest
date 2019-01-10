@@ -22,7 +22,6 @@ export class <%= nombreController %>Controller extends PrincipalController<
             mensajes<%= nombreController %>,
             undefined // contexto
             );
-            this.contexto = this;
+        this.contexto = this;
     }
-
 }
