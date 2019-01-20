@@ -43,12 +43,14 @@ module.exports = class extends Generator {
             destinoPoliticas
         );
 
-        const templateConfig = this.templatePath(TEMPLATES.CONFIG);
-        const destinoConfig = this.destinationPath(`config.ts`);
-        this.fs.copyTpl(
-            templateConfig,
-            destinoConfig
-        );
+        // const templateConfig = this.templatePath(TEMPLATES.CONFIG);
+        // const destinoConfig = this.destinationPath(`config.ts`);
+        // this.fs.copyTpl(
+        //     templateConfig,
+        //     destinoConfig
+        // );
+
+
         const templateControlador = this.templatePath(TEMPLATES.CONTROLADOR);
         const destinoControlador = this.destinationPath(`auth0.controller.ts`);
         this.fs.copyTpl(
