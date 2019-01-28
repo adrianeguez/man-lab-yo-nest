@@ -10,6 +10,8 @@ export class Auth0Controller extends PrincipalAuth0Controller {
         super(politicasAuth0,
             _authService,
             MENSAJES_AUTH0,
+            0,
+            30,
             true,
             undefined);
         this.contexto = this;

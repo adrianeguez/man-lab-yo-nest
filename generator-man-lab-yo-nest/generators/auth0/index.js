@@ -6,6 +6,8 @@ const TEMPLATES = {
     CONTROLADOR: 'controller.ts',
     CREATE: 'create.politicas.ts',
     FIND_ALL: 'find-all.politicas.ts',
+    FIND_ALL_DATOS_USUARIO: 'find-all-datos-usuario.politicas.ts',
+    FIND_WHERE_OR_DATOS_USUARIO: 'find-where-or-datos-usuario.politicas.ts',
     FIND_ONE: 'find-one.politicas.ts',
     GITIGNORE: 'gitignore',
     MENSAJES: 'mensajes-auth0.ts',
@@ -70,6 +72,20 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
             templateFindAll,
             destinoFindAll
+        );
+
+        const templateFindAllDatosUsuario = this.templatePath(TEMPLATES.FIND_ALL_DATOS_USUARIO);
+        const destinoFindAllDatosUsuario = this.destinationPath(`auth0-politicas/find-all-datos-usuario.politicas`);
+        this.fs.copyTpl(
+            templateFindAllDatosUsuario,
+            destinoFindAllDatosUsuario
+        );
+
+        const templateFindWhereOr = this.templatePath(TEMPLATES.FIND_WHERE_OR_DATOS_USUARIO);
+        const destinoFindWhereOr = this.destinationPath(`auth0-politicas/find-where-or-datos-usuario.politicas`);
+        this.fs.copyTpl(
+            templateFindWhereOr,
+            destinoFindWhereOr
         );
 
 
