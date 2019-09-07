@@ -1,17 +1,11 @@
-var Generator = require('yeoman-generator');
+const Generator = require('yeoman-generator');
+const leerJson = require('../../util/leer-manticore-labs-json');
 
-const ARGUMENTOS = {
-    NOMBRE: {
-        nombre: 'nombre',
-        configuracion: {
-            type: String,
-            required: true,
-            desc: 'Nombre del Create Dto EJ: EmpresaYEcuatoriana'
-        }
-    }
-};
+const ARGUMENTOS = {};
 const TEMPLATES = {
-    CREATE_DTO: 'create-dto.ts'
+    ENVIRONMENT: 'environment.ts',
+    GITIGNORE: 'gitignore',
+    INIT: 'init.ts'
 };
 
 const camelToDash = str => str
@@ -22,7 +16,6 @@ const camelToDash = str => str
 module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
-        this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
     }
 
     initializing() {
@@ -60,22 +53,57 @@ module.exports = class extends Generator {
 
 
     writing() {
-        const nombreCreateDto = this.options[ARGUMENTOS.NOMBRE.nombre];
-        const nombreCreateDtoMinuscula = camelToDash(nombreCreateDto);
-        const nombreCreateDtoPrivado = capitalizeFirstLetter(nombreCreateDto);
-        const template = this.templatePath(TEMPLATES.CREATE_DTO);
-        const destino = this.destinationPath(`${nombreCreateDtoMinuscula}-create-dto/${nombreCreateDtoMinuscula}-create-dto.ts`);
-        const variables = {
-            nombreCreateDto,
-            nombreCreateDtoMinuscula,
-            nombreCreateDtoPrivado
-        };
+        try {
+            const objetoJSON = leerJson(this.destinationPath(`.manticore-labs.json`), 'utf-8');
+            const ambientes = Object.keys(objetoJSON.ambientes);
+            ambientes
+                .forEach(
+                    (nombreAmbiente) => {
+                        const template = this.templatePath(TEMPLATES.ENVIRONMENT);
+                        const destino = this.destinationPath(`src/environment/config-${nombreAmbiente}.ts`);
+                        const variables = objetoJSON.ambientes[nombreAmbiente];
+                        this.fs.copyTpl(
+                            template,
+                            destino,
+                            variables
+                        );
+                        if (variables.dev) {
+                            const destinoConfig = this.destinationPath(`src/environment/config.ts`);
+                            this.fs.copyTpl(
+                                template,
+                                destinoConfig,
+                                variables
+                            );
+                        }
+                    }
+                );
 
-        this.fs.copyTpl(
-            template,
-            destino,
-            variables
-        );
+
+            const templateIgnore = this.templatePath(TEMPLATES.GITIGNORE);
+            const destinoIgnore = this.destinationPath(`src/environment/.${TEMPLATES.GITIGNORE}`);
+
+            const templateInit = this.templatePath(TEMPLATES.INIT);
+            const destinoInit = this.destinationPath(`src/environment/${TEMPLATES.INIT}`);
+
+            this.fs.copyTpl(
+                templateIgnore,
+                destinoIgnore,
+                null
+            );
+
+            this.fs.copyTpl(
+                templateInit,
+                destinoInit,
+                null
+            );
+
+        } catch (e) {
+            console.error({
+                error: e,
+                mensaje: 'No existe el archivo .manticore-labs.json'
+            });
+            throw Error('No existe archivo .manticore-labs.json')
+        }
     }
 
     conflicts() {
@@ -87,8 +115,7 @@ module.exports = class extends Generator {
     }
 
     end() {
-        const nombreServicio = this.options[ARGUMENTOS.NOMBRE.nombre];
-        this.log(`Entity ${nombreServicio} creado :)`)
+        this.log(`Se crearon los ambientes :)`)
     }
 
 };

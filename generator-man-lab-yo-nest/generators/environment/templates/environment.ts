@@ -1,6 +1,9 @@
 /* tslint:disable */
+<% if(dev){ %>
 const redis = require('redis');
 const client = redis.createClient(30621);
+<% } %>
+
 
 export const CONFIG_ENVIRONMENT: any = {
     production: false,
@@ -8,10 +11,10 @@ export const CONFIG_ENVIRONMENT: any = {
         crearDatosPrueba: true,
         mysql: {
             type: 'mysql',
-            host: 'localhost',
-            port: 30611,
-            username: 'juego',
-            password: '12345678',
+            host: '<%= hostMysql %>',
+            port: <%= puertoMysql %>,
+            username: '<%= usernameMysql %>',
+            password: '<%= passwordMysql %>',
             database: 'test',
             synchronize: true,
             retryDelay: 40000,
@@ -34,14 +37,29 @@ export const CONFIG_ENVIRONMENT: any = {
             // SELECT plugin FROM mysql.user WHERE User = 'root';
         },
         redisConnection: {
+            <% if(dev){ %>
             client: client,
             host: 'localhost',
-            port: 30621,
+            port: <%= puertoRedis %>,
+            <% } else {%>
+            port: <%= puertoRedis %>,
+            password: '<%= passwordRedis %>',
+            host: '<%= hostRedis %>',
+            db: 0,
+            <% }%>
         },
         redisStoreOptions: {
-            port: 30621,
-            // pass: 'mMQp5wvRxqwTKiDoE7PuT1D3r46l1TI5',
+            <% if(dev){ %>
+            client: client,
             host: 'localhost',
+            port: <%= puertoRedis %>,
+            <% } else {%>
+            port: <%= puertoRedis %>,
+            password: '<%= passwordRedis %>',
+            host: '<%= hostRedis %>',
+            db: 0,
+            <% }%>
+            // pass: 'mMQp5wvRxqwTKiDoE7PuT1D3r46l1TI5',
             //db: 0, // Database index to use. Defaults to Redis's default (0).
             // socket: '', // Password for Redis authentication
             // prefix: '', // Key prefix defaulting to "sess:"
@@ -51,18 +69,18 @@ export const CONFIG_ENVIRONMENT: any = {
             name: 'conexion_mongo',
             type: 'mongodb',
             useNewUrlParser: true,
-            url: `mongodb://adrianeguez:12345678@localhost:30513/test?authSource=admin`,
+            url: `<%= urlMongo %>`,
             // MONGO_INITDB_ROOT_USERNAME = adrianeguez
             // MONGO_INITDB_ROOT_PASSWORD = 12345678
             // MONGO_INITDB_DATABASE = test
         },
     },
-    puertoLevanta: 8080,
+    puertoLevanta: <%= puertoLevanta %>,
     urls: {
-        protocolo: 'http',
-        ip: 'localhost',
-        puertoEscucha: 8080,
-        segmento: '/',
+        protocolo: '<%= protocolo %>',
+        ip: '<%= ip %>',
+        puertoEscucha: <%= puertoEscucha %>,
+        segmento: '<%= segmento %>',
         url() {
             return `${this.protocolo}://${this.ip}:${this.puertoEscucha}${
                 this.segmento
@@ -114,14 +132,14 @@ export const CONFIG_ENVIRONMENT: any = {
         introspection: true,
     },
     auth0: {
-        CUENTA: 'juego-bolsa-test',
-        CLIENT_ID: 'Njus3PGOzsvEYsir6B7egaG5MgMAUQ9v',
-        SECRET: 'bR9IDO5ODP6VPYHQLyJU0p-zf5M6fUpJHygfnAs3-prox84fGDvIztR0Qb3VnSsG',
+        CUENTA: '<%= auth0Cuenta %>',
+        CLIENT_ID: '<%= auth0ClientId %>',
+        SECRET: '<%= auth0Secret %>',
     },
     auth0PasswordLogin: {
-        client_id: 'NfoEa1wIcd8hav8OeMTpyuEWVpJh5IfJ',
+        client_id: '<%= auth0ClientIdPassword %>',
         client_secret:
-            'qtU0d-CcmZWIBlHay9Ud7BuJoxBWuLdZRuuKXzB0bAEM6ZbPYP9TWwtvKxBhLASW',
+            '<%= auth0SecretPassword %>',
     },
     crearDatosPrueba: true,
     seguridad: false,

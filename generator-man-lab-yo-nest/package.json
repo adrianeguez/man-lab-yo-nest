@@ -1,6 +1,6 @@
 {
   "name": "generator-man-lab-yo-nest",
-  "version": "0.1.35",
+  "version": "0.1.49",
   "description": "Generator Manticore Labs de Nest",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/adrianeguez/man-lab-yo-nest#readme",
   "files": [
-    "generators"
+    "generators",
+    "util"
   ],
   "keywords": [
     "yeoman-generator"
