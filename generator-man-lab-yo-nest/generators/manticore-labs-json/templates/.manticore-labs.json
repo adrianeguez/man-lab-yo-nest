@@ -1,4 +1,5 @@
 {
+  "nombreAplicativo": "",
   "environment": {
     "dev": {
       "esDev": true,

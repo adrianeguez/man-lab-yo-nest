@@ -50,7 +50,10 @@ module.exports = class extends Generator {
                             this.fs.copyTpl(
                                 template,
                                 destino,
-                                variables
+                                {
+                                    ...variables,
+                                    nombreAplicativo: objetoJSON.nombreAplicativo
+                                }
                             );
                         }
                     }
