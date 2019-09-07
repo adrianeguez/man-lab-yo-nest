@@ -1,0 +1,97 @@
+{
+  "environment": {
+    "dev": {
+      "esDev": true,
+      "bases": {
+        "redis": {
+          "port": 0
+        },
+        "mysql": {
+          "port": 0,
+          "username": "",
+          "database": "",
+          "password": ""
+        },
+        "mongo": {
+          "url": ""
+        }
+      },
+      "auth0": {
+        "cuenta": "",
+        "clientId": "",
+        "secret": "",
+        "clientIdPassword": "",
+        "secretPassword": ""
+      }
+    },
+    "test": {
+      "bases": {
+        "redis": {
+          "port": 0
+        },
+        "mysql": {
+          "port": 0,
+          "username": "",
+          "database": "",
+          "password": ""
+        },
+        "mongo": {
+          "url": ""
+        }
+      },
+      "auth0": {
+        "cuenta": "",
+        "clientId": "",
+        "secret": "",
+        "clientIdPassword": "",
+        "secretPassword": ""
+      }
+    },
+    "pre-produccion": {
+      "bases": {
+        "redis": {
+          "port": 0
+        },
+        "mysql": {
+          "port": 0,
+          "username": "",
+          "database": "",
+          "password": ""
+        },
+        "mongo": {
+          "url": ""
+        }
+      },
+      "auth0": {
+        "cuenta": "",
+        "clientId": "",
+        "secret": "",
+        "clientIdPassword": "",
+        "secretPassword": ""
+      }
+    },
+    "prod": {
+      "bases": {
+        "redis": {
+          "port": 0
+        },
+        "mysql": {
+          "port": 0,
+          "username": "",
+          "database": "",
+          "password": ""
+        },
+        "mongo": {
+          "url": ""
+        }
+      },
+      "auth0": {
+        "cuenta": "",
+        "clientId": "",
+        "secret": "",
+        "clientIdPassword": "",
+        "secretPassword": ""
+      }
+    }
+  }
+}
