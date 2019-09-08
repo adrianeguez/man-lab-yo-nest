@@ -4,8 +4,16 @@ module.exports = (path, codificacion) => {
         const contenido = fs.readFileSync(path, codificacion);
         const configuracion = JSON.parse(contenido);
         const ambientes = Object.keys(configuracion.environment);
+        // gitlab-ci
+        const imagenDockerGitlab = configuracion.gitlabCI.imagenDockerGitlab;
+        const copiarSubmodulos = configuracion.gitlabCI.copiarSubmodulos;
+        const nombreCarpetaProyecto = configuracion.gitlabCI.nombreCarpetaProyecto;
+
         const objetoManticoreLabsJson = {
             nombreAplicativo: configuracion.nombreAplicativo,
+            imagenDockerGitlab,
+            copiarSubmodulos,
+            nombreCarpetaProyecto,
             ambientes: {}
         };
         ambientes
@@ -66,7 +74,10 @@ module.exports = (path, codificacion) => {
                         auth0Secret,
                         auth0ClientIdPassword,
                         auth0SecretPassword,
-                        nombreAplicativo: configuracion.nombreAplicativo
+                        nombreAplicativo: configuracion.nombreAplicativo,
+                        imagenDockerGitlab,
+                        copiarSubmodulos,
+                        nombreCarpetaProyecto
                     };
                     objetoManticoreLabsJson.ambientes[nombreAmbiente] = variables
 

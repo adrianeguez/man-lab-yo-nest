@@ -138,5 +138,10 @@
         "segmento": "/"
       }
     }
+  },
+  "gitlabCI": {
+    "imagenDockerGitlab": "node:latest",
+    "copiarSubmodulos": false,
+    "nombreCarpetaProyecto": "backend-"
   }
 }
