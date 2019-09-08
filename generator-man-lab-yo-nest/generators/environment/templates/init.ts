@@ -1,5 +1,5 @@
+/* tslint:disable */
 import {CONFIG_ENVIRONMENT} from './config';
-
 export async function init() {
     let existeArchivoLocal = false;
     let config;
