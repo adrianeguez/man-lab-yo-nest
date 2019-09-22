@@ -6,6 +6,7 @@ const TEMPLATES = {
     CANCEL_NOTIFICATION: 'cancel-notification.politicas.ts',
     VIEW_DEVICES: 'view-devices.politicas.ts',
     VIEW_DEVICE: 'view-device.politicas.ts',
+    EDIT_DEVICE: 'edit-device.politicas.ts',
     VIEW_NOTIFICATIONS: 'view-notifications.politicas.ts',
     VIEW_NOTIFICATION: 'view-notification.politicas.ts',
     CONTROLADOR: 'one-signal.controller.ts',
@@ -68,6 +69,13 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
             templateViewDevice,
             destinoViewDevice
+        );
+
+        const templateEditDevice = this.templatePath(TEMPLATES.EDIT_DEVICE);
+        const destinoEditDevice = this.destinationPath(`one-signal-politicas/${TEMPLATES.EDIT_DEVICE}`);
+        this.fs.copyTpl(
+            templateEditDevice,
+            destinoEditDevice
         );
 
 
