@@ -1,0 +1,147 @@
+{
+  "nombreAplicativo": "",
+  "environment": {
+    "dev": {
+      "esDev": true,
+      "bases": {
+        "redis": {
+          "port": 0,
+          "password": "",
+          "host": "",
+          "tagDocker": "latest"
+        },
+        "mysql": {
+          "port": 0,
+          "username": "manticore",
+          "database": "test",
+          "password": "12345678",
+          "host": "localhost",
+          "tagDocker": "5.7"
+        },
+        "mongo": {
+          "url": "mongodb://manticore:12345678@localhost:PONER_PUERTO/test?authSource=admin",
+          "tagDocker": "latest",
+          "port": "PONER_PUERTO"
+        }
+      },
+      "auth0": {
+        "cuenta": "",
+        "clientId": "",
+        "secret": "",
+        "clientIdPassword": "",
+        "secretPassword": ""
+      },
+      "ambiente": {
+        "puertoLevanta": 8080,
+        "protocolo": "http",
+        "ip": "localhost",
+        "puertoEscucha": 8080,
+        "segmento": "/"
+      }
+    },
+    "test": {
+      "bases": {
+        "redis": {
+          "port": 0,
+          "password": "",
+          "host": ""
+        },
+        "mysql": {
+          "port": 0,
+          "username": "",
+          "database": "",
+          "password": "",
+          "host": ""
+        },
+        "mongo": {
+          "url": ""
+        }
+      },
+      "auth0": {
+        "cuenta": "",
+        "clientId": "",
+        "secret": "",
+        "clientIdPassword": "",
+        "secretPassword": ""
+      },
+      "ambiente": {
+        "puertoLevanta": 0,
+        "protocolo": "http",
+        "ip": "",
+        "puertoEscucha": 0,
+        "segmento": "/"
+      }
+    },
+    "pre-produccion": {
+      "bases": {
+        "redis": {
+          "port": 0,
+          "password": "",
+          "host": ""
+        },
+        "mysql": {
+          "port": 0,
+          "username": "",
+          "database": "",
+          "password": "",
+          "host": ""
+        },
+        "mongo": {
+          "url": ""
+        }
+      },
+      "auth0": {
+        "cuenta": "",
+        "clientId": "",
+        "secret": "",
+        "clientIdPassword": "",
+        "secretPassword": ""
+      },
+      "ambiente": {
+        "puertoLevanta": 0,
+        "protocolo": "http",
+        "ip": "",
+        "puertoEscucha": 0,
+        "segmento": "/"
+      }
+    },
+    "prod": {
+      "bases": {
+        "redis": {
+          "port": 0,
+          "password": "",
+          "host": ""
+        },
+        "mysql": {
+          "port": 0,
+          "username": "",
+          "database": "",
+          "password": "",
+          "host": ""
+        },
+        "mongo": {
+          "url": ""
+        }
+      },
+      "auth0": {
+        "cuenta": "",
+        "clientId": "",
+        "secret": "",
+        "clientIdPassword": "",
+        "secretPassword": ""
+      },
+      "ambiente": {
+        "puertoLevanta": 0,
+        "protocolo": "http",
+        "ip": "",
+        "puertoEscucha": 0,
+        "segmento": "/"
+      }
+    }
+  },
+  "gitlabCI": {
+    "imagenDockerGitlab": "node:latest",
+    "copiarSubmodulos": false,
+    "nombreCarpetaProyecto": "backend-"
+  }
+}

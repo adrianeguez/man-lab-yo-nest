@@ -1,0 +1,57 @@
+image: <%= imagenDockerGitlab %>
+<% if(copiarSubmodulos){ %>variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+<% } %>
+before_script:
+  - cd <%= nombreCarpetaProyecto %>
+  - ls
+  - npm i
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
+stages:
+  - build
+  - test
+  - pre
+  - produccion
+
+build:
+  stage: build
+  only:
+    - desarrollo
+  script:
+    - npm run prestart:prod
+
+deploy_test:
+  stage: test
+  only:
+    - test
+  script:
+    - apt-get update -y -qq
+    - apt-get -y install rsync -qq
+    - pwd
+    - npm run prestart:prod
+    - rm -rf node_modules || true
+    - rm -rf ci-cd || true
+    - rm -rf src || true
+    - ssh -o StrictHostKeyChecking=no -tt server@186.4.149.35 -p $PORT_SERVER_SSH "echo $PASSWORD | sudo -S mount /dev/sdb5 /media/trabajo || true && exit"
+    - ssh -o StrictHostKeyChecking=no -o TCPkeepAlive=yes -o ServerAliveInterval=30 -tt server@186.4.149.35 -p $PORT_SERVER_SSH "pm2 stop $APP_NAME || true && pm2 delete $APP_NAME || true && rm -rf /media/trabajo/testing/$APP_NAME && mkdir /media/trabajo/testing/$APP_NAME && exit"
+    - cd .. && rsync -avz -e "ssh -p $PORT_SERVER_SSH -o StrictHostKeyChecking=no -o TCPkeepAlive=yes -o ServerAliveInterval=30" --progress ./<%= nombreCarpetaProyecto %>/ server@186.4.149.35:/media/trabajo/testing/$APP_NAME
+    - ssh -o StrictHostKeyChecking=no -o TCPkeepAlive=yes -o ServerAliveInterval=30 -tt server@186.4.149.35 -p $PORT_SERVER_SSH " cd /media/trabajo/testing/$APP_NAME && npm i && pm2 start dist/main.js --name $APP_NAME -- --port=$PORT && pm2 save && exit"
+
+lint:
+  stage: test
+  only:
+    - desarrollo
+  script:
+    - npm run lint
+
+test:
+  stage: test
+  only:
+    - desarrollo
+  script:
+    - npm run test
