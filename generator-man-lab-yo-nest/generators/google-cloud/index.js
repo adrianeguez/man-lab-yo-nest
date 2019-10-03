@@ -3,8 +3,8 @@ var Generator = require('yeoman-generator');
 const TEMPLATES = {
     README: 'README.md',
     API_JSON: 'google-cloud-api-key.json',
-    MENSAJES: 'mensajes-auth0.ts',
-    MODULO: 'google-cloud.module',
+    MENSAJES: 'mensajes-google-cloud.ts',
+    MODULO: 'google-cloud.module.ts',
     SERVICIO: 'google-cloud.service.ts'
 };
 
