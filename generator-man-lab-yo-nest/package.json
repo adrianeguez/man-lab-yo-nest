@@ -1,6 +1,6 @@
 {
   "name": "generator-man-lab-yo-nest",
-  "version": "0.1.58",
+  "version": "0.2.5",
   "description": "Generator Manticore Labs de Nest",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,6 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "yeoman-generator": "^1.0.0"
+    "yeoman-generator": "^3.2.0"
   }
 }
