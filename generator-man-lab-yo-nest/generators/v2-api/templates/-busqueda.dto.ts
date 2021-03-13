@@ -1,7 +1,7 @@
-import {IsNumberString, IsOptional, IsString} from 'class-validator';
+import {IsNumberString, IsOptional} from 'class-validator';
 import {Expose} from 'class-transformer';
 
-export class <%= nombreMayuscula %>BusquedaDto extends BusquedaComunDto {
+export class <%= nombreMayuscula %>BusquedaDto extends BusquedaComunProyectoDto {
 
     @IsOptional()
     @IsNumberString()

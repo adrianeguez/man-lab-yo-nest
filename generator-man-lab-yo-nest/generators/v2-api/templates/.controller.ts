@@ -21,10 +21,12 @@ const nombreControlador = '<%= nombreGuiones%>';
 export class <%= nombreMayuscula %>Controller extends ControladorComun {
     constructor(
         private readonly _<%= nombreCamel %>Service: <%= nombreMayuscula %>Service,
+        private readonly _seguridadService: SeguridadService,
         private readonly _auditoriaService: AuditoriaService,
     ) {
         super(
             _<%= nombreCamel %>Service,
+            _seguridadService,
             _auditoriaService,
             <%= nombreSoloMayusculas %>_OCC(
                 <%= nombreMayuscula %>HabilitadoDto,
@@ -32,6 +34,8 @@ export class <%= nombreMayuscula %>Controller extends ControladorComun {
                 <%= nombreMayuscula %>ActualizarDto,
                 <%= nombreMayuscula %>BusquedaDto,
             ),
+            NUMERO_REGISTROS_DEFECTO,
+            NUMERO_MAXIMO_REGISTROS_CONSULTARSE,
         );
     }
 
@@ -60,7 +64,7 @@ export class <%= nombreMayuscula %>Controller extends ControladorComun {
                 parametrosConsulta.skip,
                 parametrosConsulta.take,
             );
-            // Definir el orden según los parámtros sortField y sortOrder
+            // Definir el orden según los parámetros sortField y sortOrder
             const orden = this._<%= nombreCamel %>Service.establecerOrden(
                 parametrosConsulta.sortField,
                 parametrosConsulta.sortOrder,
@@ -97,7 +101,9 @@ export class <%= nombreMayuscula %>Controller extends ControladorComun {
                     consultaWhere,
                     parametrosConsulta.<%= nombreHabilitado %>,
                 );
-                consulta = this._<%= nombreCamel %>Service.convertirEnMayusculas(consulta);
+
+                // OPCIONAL si desea convertir en mayusculas todos los strings
+                // consulta = this._<%= nombreCamel %>Service.convertirEnMayusculas(consulta);
             }
 
             qb.where(consulta.where);

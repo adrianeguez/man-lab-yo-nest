@@ -18,6 +18,10 @@ export class <%= nombreMayuscula %>Service extends ServicioComun<<%= nombreMayus
         <%= nombreMayuscula %>Entity,
       '<%= id %>',
       _auditoriaService,
+        // Por defecto NO se transforma todos los campos a mayúsculas.
+        // Si DESEA transformar todos los campos a mayúsculas comente la siguiente línea
+        // O implemente sus metodos para transformación en búsqueda, beforeInsert y beforeUpdate
+        (objetoATransformar, metodo) => objetoATransformar
     );
   }
 }

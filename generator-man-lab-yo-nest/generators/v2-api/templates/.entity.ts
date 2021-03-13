@@ -11,7 +11,7 @@ import {
 
 @Entity(PREFIJO_BASE + '<%= nombreSoloMayusculas %>')
 @Index(['<%= nombreHabilitado %>', '<%= nombreCreatedAt %>', '<%= nombreUpdatedAt %>'])
-export class <%= nombreMayuscula %>Entity extends EntidadComun {
+export class <%= nombreMayuscula %>Entity extends EntidadComunProyecto {
     @PrimaryGeneratedColumn({
         name: 'ID_<%= nombreSoloMayusculas %>',
         unsigned: true,
