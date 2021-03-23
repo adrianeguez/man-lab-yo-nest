@@ -33,7 +33,7 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: false,
-            desc: 'Nombre del campo habilitado. por defecto es "habilitado". EJ: empresaHabilitado'
+            desc: 'Nombre del campo habilitado. por defecto es "habilitado". EJ: sisHabilitado'
         }
     },
     NOMBRE_CREATED_AT: {
@@ -41,7 +41,7 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: false,
-            desc: 'Nombre del campo CreatedAt EJ: EmpresaYEcuatoriana'
+            desc: 'Nombre del campo CreatedAt EJ: sisCreado'
         }
     },
     NOMBRE_UPDATED_AT: {
@@ -49,7 +49,7 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: false,
-            desc: 'Nombre del campo UpdateddAt EJ: EmpresaYEcuatoriana'
+            desc: 'Nombre del campo UpdateddAt EJ: sisModificado'
         }
     },
 };
