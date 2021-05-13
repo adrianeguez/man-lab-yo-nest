@@ -136,6 +136,19 @@ export class <%= nombreMayuscula %>Controller extends ControladorComun {
             return qb.skip(consulta.skip)
                 .take(consulta.take)
                 .getManyAndCount();
+
+            // Activar para archivos estas lineas
+
+            // const consultaGetManyAndCount = await qb
+            //     .skip(consulta.skip)
+            //     .take(consulta.take)
+            //     .getManyAndCount();
+            // return this._<%= nombreCamel %>Service.recuperarImagenesArchivoSecundario(
+            //     consultaGetManyAndCount,
+            //     this._archivoPrincipalService,
+            //     '<%= nombreGuiones%>',
+            //     ['AR', 'IM'],
+            // );
         }
     }
 }

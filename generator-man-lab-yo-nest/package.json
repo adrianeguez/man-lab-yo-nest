@@ -1,6 +1,6 @@
 {
   "name": "generator-man-lab-yo-nest",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Generator Manticore Labs de Nest",
   "main": "index.js",
   "scripts": {
